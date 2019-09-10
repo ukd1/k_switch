@@ -39,3 +39,4 @@ I'm considering:
 
 * Getting this to work automatically when you switch folders. Seems like doing what rbenv does (shimming) is the easiest. Any other suggestions?
 * Putting on brew so it's easier to keep up to date
+* Support for multiple namespaces / contexts

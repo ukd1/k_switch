@@ -11,26 +11,26 @@ folder = FileUtils.pwd().split("/")
 done = false
 
 loop do
-	# try get the context & namespace
-	context = get_first_non_comment_line(File.join(folder, ".k_context"))
-	namespace = get_first_non_comment_line(File.join(folder, ".k_namespace"))
+  # try get the context & namespace
+  context = get_first_non_comment_line(File.join(folder, ".k_context"))
+  namespace = get_first_non_comment_line(File.join(folder, ".k_namespace"))
 
-	if context && namespace
-		puts "k8s --> context: #{context}, namespace: #{namespace}"
-		`kubectl config use-context #{Shellwords.escape(context)} --namespace=#{Shellwords.escape(namespace)}`
-		done = true
-	elsif context
-		puts "k8 --> context: #{context}"
-		`kubectl config use-context #{Shellwords.escape(context)}`
-		done = true
-	elsif namespace
-		puts "k8 --> namespace: #{namespace}"
-		`kubectl config set-context --current --namespace=#{Shellwords.escape(namespace)}`
-		done = true
-	end
+  if context && namespace
+    puts "k8s --> context: #{context}, namespace: #{namespace}"
+    `kubectl config use-context #{Shellwords.escape(context)} --namespace=#{Shellwords.escape(namespace)}`
+    done = true
+  elsif context
+    puts "k8 --> context: #{context}"
+    `kubectl config use-context #{Shellwords.escape(context)}`
+    done = true
+  elsif namespace
+    puts "k8 --> namespace: #{namespace}"
+    `kubectl config set-context --current --namespace=#{Shellwords.escape(namespace)}`
+    done = true
+  end
 
-	# go up to parent
-	folder.pop()
+  # go up to parent
+  folder.pop()
 
-	break if folder.empty? || done 
+  break if folder.empty? || done 
 end
